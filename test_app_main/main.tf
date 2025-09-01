@@ -1,20 +1,22 @@
 module "rg" {
-  source = "../modules/resource_group"
-    name     = var.dev_rg.name
-    location = var.dev_rg.location
+  source   = "../modules/resource_group"
+  for_each = var.rgs
+  name     = each.value.name
+  location = each.value.location
 }
 
 module "stg" {
-    depends_on = [ module.rg ]
-    
+  depends_on = [module.rg]
+
   source = "../modules/storage_account"
- 
-    name                     = var.dev_stg.name
-    resource_group_name      = var.dev_stg.resource_group_name
-    location                 = var.dev_stg.location
-    account_tier             = var.dev_stg.account_tier
-    account_replication_type = var.dev_stg.account_replication_type
+  for_each = var.stgs
+
+  name                     = each.value.name
+  resource_group_name      = each.value.resource_group_name
+  location                 = each.value.location
+  account_tier             = each.value.account_tier
+  account_replication_type = each.value.account_replication_type
 
 
-  }
+}
 
