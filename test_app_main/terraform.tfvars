@@ -8,6 +8,10 @@ prod_rg = {
   name     = "ta_rg1"
   location = "eastus"
 }
+prod_rg2 = {
+  name     = "ta_rgin"
+  location = "centralindia"
+}
 
 }
 
